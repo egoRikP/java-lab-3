@@ -66,7 +66,7 @@ public abstract class AbstractDroid {
         return currentHealth > 0;
     }
 
-    private void prepareAbility() {
+    protected void prepareAbility() {
         isAbilityCrit = Math.random() <= abilityCritChance;
         currentAbilityValue = isAbilityCrit ? abilityValue * abilityMultiplier : abilityValue;
     }
@@ -88,6 +88,10 @@ public abstract class AbstractDroid {
         }
 
         return String.format("[%s %s [%s] %d/%d]", currentHealth > 0 ? icon : "❌ " + icon, name, health, currentHealth, maxHealth);
+    }
+
+    public boolean isDamaged() {
+        return currentHealth != maxHealth;
     }
 
     @Override
