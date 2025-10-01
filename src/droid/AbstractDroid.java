@@ -1,5 +1,7 @@
 package droid;
 
+import battle.BattleLogger;
+
 import java.util.List;
 
 public abstract class AbstractDroid {
@@ -16,12 +18,12 @@ public abstract class AbstractDroid {
     protected double abilityCritChance;
     protected boolean isAbilityCrit;
 
-    public final void useAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam) {
+    public final void useAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
         prepareAbility();
-        executeAbility(currentTeam, otherTeam);
+        executeAbility(currentTeam, otherTeam,logger);
     }
 
-    public abstract void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam);
+    public abstract void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger);
 
     AbstractDroid(String name, int health, int abilityValue, int abilityMultiplier, double abilityCritChance) {
         this.name = name;

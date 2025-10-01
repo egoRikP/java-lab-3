@@ -1,5 +1,7 @@
 package droid;
 
+import battle.BattleLogger;
+
 import java.util.List;
 
 public class DefaultDroid extends AbstractDroid {
@@ -9,7 +11,7 @@ public class DefaultDroid extends AbstractDroid {
     }
 
     @Override
-    public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam) {
+    public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
         AbstractDroid target = otherTeam.stream().filter(AbstractDroid::isAlive).findFirst().orElse(null);
 
         if (target == null) {
@@ -17,17 +19,6 @@ public class DefaultDroid extends AbstractDroid {
         }
 
         target.takeDamage(currentAbilityValue);
-
-        System.out.printf(String.format("[A] %s %s %d [B] %s\n",
-                this.formatPrint(),
-                (this.isAbilityCrit() ? "CRIT" : "ATTACK") + " WITH DAMAGE ",
-                this.getCurrentAbilityValue(),
-                target.formatPrint()));
-
-        if (!target.isAlive()) {
-            System.out.printf(String.format("[A] %s BEAT [B] %s\n",
-                    this.formatPrint(),
-                    target.formatPrint()));
-        }
+        logger.logAttack(this, target);
     }
 }
