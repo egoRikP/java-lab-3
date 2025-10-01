@@ -1,6 +1,7 @@
 package droid;
 
 import battle.BattleLogger;
+import battle.BattleUtils;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class DefaultDroid extends AbstractDroid {
 
     @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
-        AbstractDroid target = otherTeam.stream().filter(AbstractDroid::isAlive).findFirst().orElse(null);
+        AbstractDroid target = BattleUtils.findRandomAlive(otherTeam);
 
         if (target == null) {
             return;
