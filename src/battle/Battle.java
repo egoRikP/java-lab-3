@@ -3,7 +3,6 @@ package battle;
 import droid.AbstractDroid;
 
 import java.util.List;
-import java.util.Random;
 
 public class Battle {
 
@@ -12,49 +11,60 @@ public class Battle {
 
     private int currentMove;
 
+    private BattleLogger logger = new BattleLogger();
+
     public Battle(List<AbstractDroid> teamA, List<AbstractDroid> teamB) {
         this.teamA = List.copyOf(teamA);
         this.teamB = List.copyOf(teamB);
     }
 
     private void showTeam(List<AbstractDroid> team) {
-        for (AbstractDroid droid : teamA) {
-            System.out.println(droid);
+        if (team.size() == 0) {
+            return;
+        }
+
+        for (AbstractDroid droid : team) {
+            logger.log(droid.formatPrint());
         }
     }
 
     private void showInfo() {
-        System.out.println(String.format("TEAM A"));
+        logger.log("TEAM A");
         showTeam(teamA);
 
-        System.out.println(String.format("TEAM B"));
+        logger.log("TEAM B");
         showTeam(teamB);
     }
 
     public void start() {
-        
+
         if (teamA.size() == 0 || teamB.size() == 0) {
-            System.out.println("Team can't be empty!");
             return;
         }
 
         showInfo();
+        logger.log("\n");
 
-        while (teamA.stream().anyMatch(AbstractDroid::isAlive) && teamB.stream().anyMatch(AbstractDroid::isAlive)) {
+        while (BattleUtils.isTeamAlive(teamA) && BattleUtils.isTeamAlive(teamB)) {
             currentMove++;
 
-            System.out.println(String.format("MOVE %d", currentMove));
+            logger.log(String.format("=============  MOVE %2d =============", currentMove));
 
-            if (new Random().nextBoolean()) {
-                System.out.println(String.format("TEAM A"));
-                teamA.getFirst().useAbility(teamA, teamB);
+            if (BattleUtils.isTeamAFirst()) {
+                logger.log("TEAM A");
+                BattleUtils.findRandomAlive(teamA).useAbility(teamA, teamB, logger);
             } else {
-                System.out.println(String.format("TEAM B"));
-                teamB.getFirst().useAbility(teamB, teamA);
+                logger.log("TEAM B");
+                BattleUtils.findRandomAlive(teamB).useAbility(teamB, teamA, logger);
             }
 
         }
 
+        showInfo();
+    }
+
+    public void showLogs() {
+        logger.show();
     }
 
 }
