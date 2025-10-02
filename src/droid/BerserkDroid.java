@@ -27,12 +27,17 @@ public class BerserkDroid extends AbstractDroid {
     }
 
     @Override
+    public AbstractDroid copy() {
+        return new BerserkDroid(name, maxHealth, abilityValue, abilityMultiplier, abilityCritChance, rageCoefficient);
+    }
+
+    @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
         AbstractDroid target = BattleUtils.findRandomAlive(otherTeam);
         if (target == null) {
             return;
         }
-        
+
         target.takeDamage(currentAbilityValue);
         logger.logAttack(this, target);
     }

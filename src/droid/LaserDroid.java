@@ -17,6 +17,11 @@ public class LaserDroid extends AbstractDroid {
     }
 
     @Override
+    public AbstractDroid copy() {
+        return new LaserDroid(name, maxHealth, abilityValue, abilityMultiplier, abilityCritChance, countToLoad);
+    }
+
+    @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
 
         currentCount++;

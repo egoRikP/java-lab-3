@@ -16,6 +16,11 @@ public class HealerDroid extends AbstractDroid {
     }
 
     @Override
+    public AbstractDroid copy() {
+        return new HealerDroid(name, maxHealth, abilityValue, abilityMultiplier, abilityCritChance, abilityCount);
+    }
+
+    @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
 
         AbstractDroid[] toHeal = BattleUtils.findAlives(currentTeam).stream()

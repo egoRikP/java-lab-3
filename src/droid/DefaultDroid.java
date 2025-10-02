@@ -12,6 +12,11 @@ public class DefaultDroid extends AbstractDroid {
     }
 
     @Override
+    public AbstractDroid copy() {
+        return new DefaultDroid(name, maxHealth, abilityValue, abilityMultiplier, abilityCritChance);
+    }
+
+    @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
         AbstractDroid target = BattleUtils.findRandomAlive(otherTeam);
 

@@ -16,6 +16,11 @@ public class BomberDroid extends AbstractDroid {
     }
 
     @Override
+    public AbstractDroid copy() {
+        return new BomberDroid(name, maxHealth, abilityValue, abilityMultiplier, abilityCritChance, abilityRange);
+    }
+
+    @Override
     public void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger) {
 
         AbstractDroid target = otherTeam.stream().filter(AbstractDroid::isAlive).findFirst().orElse(null);

@@ -23,6 +23,8 @@ public abstract class AbstractDroid {
         executeAbility(currentTeam, otherTeam,logger);
     }
 
+    public abstract AbstractDroid copy();
+
     public abstract void executeAbility(List<AbstractDroid> currentTeam, List<AbstractDroid> otherTeam, BattleLogger logger);
 
     AbstractDroid(String name, int health, int abilityValue, int abilityMultiplier, double abilityCritChance) {
