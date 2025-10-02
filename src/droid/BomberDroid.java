@@ -40,7 +40,7 @@ public class BomberDroid extends AbstractDroid {
             }
             int splashDamage = currentAbilityValue * 50 / 100;
             droid.takeDamage(splashDamage);
-            logger.log("  -> " + droid.formatPrint() + " took splash damage " + splashDamage);
+            logger.log("    -> " + droid.formatPrint() + " took splash damage " + splashDamage);
         }
 
     }

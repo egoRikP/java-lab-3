@@ -52,13 +52,14 @@ public class Battle {
             return;
         }
 
-        showInfo();
-        logger.log("\n");
+        moreAbout(teamA);
+        moreAbout(teamB);
+        logger.log("");
 
         while (BattleUtils.isTeamAlive(teamA) && BattleUtils.isTeamAlive(teamB)) {
             currentMove++;
 
-            logger.log(String.format("=============  MOVE %2d =============", currentMove));
+            logger.log(String.format("=============  MOVE %d =============", currentMove));
 
             if (BattleUtils.isTeamAFirst()) {
                 logger.log("TEAM A");
@@ -69,8 +70,16 @@ public class Battle {
             }
 
         }
+        logger.log("");
+
+        if (BattleUtils.findAlives(teamA).isEmpty()) {
+            logger.log("TEAM B WIN");
+        } else {
+            logger.log("TEAM A WIN");
+        }
 
         showInfo();
+
     }
 
     public void showLogs() {
