@@ -77,4 +77,7 @@ public class Battle {
         logger.show();
     }
 
+    public BattleLogger getLogger() {
+        return logger;
+    }
 }
