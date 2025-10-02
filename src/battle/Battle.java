@@ -2,6 +2,7 @@ package battle;
 
 import droid.AbstractDroid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Battle {
@@ -14,8 +15,17 @@ public class Battle {
     private BattleLogger logger = new BattleLogger();
 
     public Battle(List<AbstractDroid> teamA, List<AbstractDroid> teamB) {
-        this.teamA = List.copyOf(teamA);
-        this.teamB = List.copyOf(teamB);
+        this.teamA = new ArrayList<>();
+
+        for (AbstractDroid droid : teamA) {
+            this.teamA.add(droid.copy());
+        }
+
+        this.teamB = new ArrayList<>();
+
+        for (AbstractDroid droid : teamB) {
+            this.teamB.add(droid.copy());
+        }
     }
 
     private void showTeam(List<AbstractDroid> team) {
