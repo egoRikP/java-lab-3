@@ -44,4 +44,12 @@ public class BomberDroid extends AbstractDroid {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s -> Bomber (single boom + splash dmg) { abilityRangeToSplash %d }", super.toString(), abilityRange
+        );
+    }
+
 }

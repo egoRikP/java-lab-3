@@ -38,4 +38,11 @@ public class HealerDroid extends AbstractDroid {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s -> Healer (heal mates) { mates to heal %d }", super.toString(), abilityCount
+        );
+    }
 }

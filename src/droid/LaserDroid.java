@@ -37,4 +37,11 @@ public class LaserDroid extends AbstractDroid {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s -> Laser (charge attack) { countToCharge %d }", super.toString(), countToLoad
+        );
+    }
 }

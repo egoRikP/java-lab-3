@@ -41,4 +41,11 @@ public class BerserkDroid extends AbstractDroid {
         target.takeDamage(currentAbilityValue);
         logger.logAttack(this, target);
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "%s -> Berserk (less HP more dmg) { rageCoefficient %d }", super.toString(), rageCoefficient
+        );
+    }
 }
