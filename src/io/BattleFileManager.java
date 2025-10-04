@@ -12,42 +12,29 @@ import java.util.List;
 
 public class BattleFileManager {
 
-    public static List<String> read(String path) {
+    public static List<String> read(String path) throws IOException {
         List<String> res = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-
             String buff;
             while ((buff = reader.readLine()) != null) {
                 res.add(buff);
             }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Can't find file " + path);
-        } catch (IOException e) {
-            System.out.println("IO exception while reading battle: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Other exception " + e.getMessage());
         }
 
         return res;
     }
 
-    public static void save(AbstractBattle battle) {
+    public static void save(AbstractBattle battle) throws IOException {
         BattleLogger logger = battle.getBattleLogger();
         Path logsDir = Paths.get("battleLogs");
 
-        try {
-            // create directory logs when not exist
-            Files.createDirectories(logsDir);
+        // create directory logs when not exist
+        Files.createDirectories(logsDir);
 
-            Path filePath = logsDir.resolve(getFileNameWithTimestamp());
-            Files.write(filePath, logger.getLogs());
-            System.out.println("Battle saved to " + filePath);
-
-        } catch (IOException e) {
-            System.out.println("IO exception while saving battle: " + e.getMessage());
-        }
+        Path filePath = logsDir.resolve(getFileNameWithTimestamp());
+        Files.write(filePath, logger.getLogs());
+        System.out.println("Battle saved to " + filePath);
     }
 
     private static String getFileNameWithTimestamp() {
